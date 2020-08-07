@@ -10,6 +10,9 @@ defmodule TalkLikeAX do
       iex> TalkLikeAX.translate("hello friend")
       { :ok, "ahoy shipmate" }
 
+      iex> TalkLikeAX.translate("hello friend", :pirate)
+      { :ok, "ahoy shipmate" }
+
   """
   def translate(words, lingo \\ :pirate) when is_bitstring(words) do
     case load_lingo(lingo) do

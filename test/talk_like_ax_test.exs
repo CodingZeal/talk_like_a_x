@@ -15,10 +15,6 @@ defmodule TalkLikeAXTest do
   end
 
   describe "#translate/2" do
-    test "coverts sentence to requested lingo, :pirate" do
-      assert TalkLikeAX.translate("hello friend", :pirate) == { :ok, "ahoy shipmate" }
-    end
-
     test "return error & message when file not found" do
       assert TalkLikeAX.translate("hello friend", :nothing_found) == { :error, :file_not_found}
     end
