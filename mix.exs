@@ -23,7 +23,9 @@ defmodule TalkLikeAX.MixProject do
     [
       # {:dep_from_hexpm, "~> 0.3.0"},
       # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
-      {:yaml_elixir, "~> 2.5"}
+      {:yaml_elixir, "~> 2.5"},
+      {:credo, "~> 1.4", only: [:dev, :test], runtime: false},
+      {:mix_test_watch, "~> 1.0", only: :dev, runtime: false}
     ]
   end
 end
