@@ -10,8 +10,8 @@ defmodule TalkLikeAXTest do
     end
 
     test "coverts sentence to priate lingo with punctuation" do
-      assert TalkLikeAX.translate("hello friend, that's really you're.") ==
-               {:ok, "ahoy shipmate, that be verily you be."}
+      assert TalkLikeAX.translate("hello friend, that's really nice hat you got there friend.") ==
+               {:ok, "ahoy shipmate, that be verily nice hat ye got there shipmate."}
     end
   end
 
@@ -30,6 +30,12 @@ defmodule TalkLikeAXTest do
     test "handles lingo that doesnt exist" do
       {status, message} = TalkLikeAX.load_lingo(:blahblah)
       assert status == :error
+    end
+  end
+
+  describe "#extract_punctuation/1" do
+    test "return list containg leading punc, word, and trailing punc" do
+      assert TalkLikeAX.extract_punctuation(",this.out.") == [",", "this.out", "."]
     end
   end
 end

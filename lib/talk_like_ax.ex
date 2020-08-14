@@ -1,4 +1,7 @@
 defmodule TalkLikeAX do
+  @leading_punctuation_regex ~r/\A([^a-zA-Z]*)/
+  @trailing_punctuation_regex ~r/[a-zA-Z]+([^a-zA-Z]*)\Z/
+
   @moduledoc """
   Documentation for `TalkLikeAX`.
   """
@@ -29,8 +32,18 @@ defmodule TalkLikeAX do
     |> Enum.join(" ")
   end
 
+  @spec extract_punctuation(any) :: nil
   def extract_punctuation(word) do
-    String.split(word, ~r{\A([^a-zA-Z]*)}, trim: true)
+    [[ _, leading_punctuation ]] = Regex.scan @leading_punctuation_regex, word
+    [[ _, trailing_punctuation ]] = Regex.scan @trailing_punctuation_regex, word
+
+    leading_length = String.length(leading_punctuation)
+
+    word_length = String.length(word) - leading_length - String.length(trailing_punctuation)
+
+    pure_word = String.slice(word, leading_length, word_length)
+
+    [ leading_punctuation, pure_word, trailing_punctuation]
   end
 
   def load_lingo(lingo \\ :pirate) do
