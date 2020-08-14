@@ -16,8 +16,8 @@ defmodule TalkLikeAX do
   """
   def translate(words, lingo \\ :pirate) when is_bitstring(words) do
     case load_lingo(lingo) do
-      { :ok, lingo_map } -> { :ok, convert_lingo(words, lingo_map) }
-      { :error, _ } -> { :error, :file_not_found }
+      {:ok, lingo_map} -> {:ok, convert_lingo(words, lingo_map)}
+      {:error, _} -> {:error, :file_not_found}
     end
   end
 

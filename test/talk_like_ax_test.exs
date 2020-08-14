@@ -10,13 +10,14 @@ defmodule TalkLikeAXTest do
     end
 
     test "coverts sentence to priate lingo with punctuation" do
-      assert TalkLikeAX.translate("hello friend, that's really you're.") == { :ok, "ahoy shipmate, that be verily you be." }
+      assert TalkLikeAX.translate("hello friend, that's really you're.") ==
+               {:ok, "ahoy shipmate, that be verily you be."}
     end
   end
 
   describe "#translate/2" do
     test "return error & message when file not found" do
-      assert TalkLikeAX.translate("hello friend", :nothing_found) == { :error, :file_not_found}
+      assert TalkLikeAX.translate("hello friend", :nothing_found) == {:error, :file_not_found}
     end
   end
 
@@ -27,7 +28,7 @@ defmodule TalkLikeAXTest do
     end
 
     test "handles lingo that doesnt exist" do
-      { status, message } = TalkLikeAX.load_lingo(:blahblah)
+      {status, message} = TalkLikeAX.load_lingo(:blahblah)
       assert status == :error
     end
   end
