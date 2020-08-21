@@ -36,6 +36,19 @@ defmodule TalkLikeAXTest do
   describe "#extract_punctuation/1" do
     test "return list containg leading punc, word, and trailing punc" do
       assert TalkLikeAX.extract_punctuation(",this.out.") == [",", "this.out", "."]
+      assert TalkLikeAX.extract_punctuation(",,,,this.out......") == [",,,,", "this.out", "......"]
+    end
+  end
+
+  describe "#convert_word" do
+    test "Converts the word 'friend' to 'shipmate'" do
+      {:ok, pirate_lingo} = TalkLikeAX.load_lingo()
+      assert TalkLikeAX.convert_word(pirate_lingo, "friend") == "shipmate"
+    end
+
+    test "Converts the word with punctuation 'hello!' to 'ahoy!'" do
+      {:ok, pirate_lingo} = TalkLikeAX.load_lingo()
+      assert TalkLikeAX.convert_word(pirate_lingo, "hello!") == "ahoy!"
     end
   end
 end

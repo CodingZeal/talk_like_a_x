@@ -19,17 +19,23 @@ defmodule TalkLikeAX do
   """
   def translate(words, lingo \\ :pirate) when is_bitstring(words) do
     case load_lingo(lingo) do
-      {:ok, lingo_map} -> {:ok, convert_lingo(words, lingo_map)}
+      {:ok, lingo_map} -> {:ok, convert_to_lingo(words, lingo_map)}
       {:error, _} -> {:error, :file_not_found}
     end
   end
 
-  def convert_lingo(words, lingo_map) do
+  def convert_to_lingo(words, lingo_map) do
     words
     |> String.downcase(:default)
     |> String.split(" ")
-    |> Enum.map(fn word -> Map.get(lingo_map, word, word) end)
+    |> Enum.map(fn word -> convert_word(lingo_map, word) end)
     |> Enum.join(" ")
+  end
+
+  def convert_word(lingo_map, word) do
+    [leading_puncuation, pure_word, trailing_puncuation] = extract_punctuation(word)
+    new_word = Map.get(lingo_map, pure_word, pure_word)
+    leading_puncuation <> new_word <> trailing_puncuation
   end
 
   @spec extract_punctuation(any) :: nil
@@ -38,9 +44,7 @@ defmodule TalkLikeAX do
     [[ _, trailing_punctuation ]] = Regex.scan @trailing_punctuation_regex, word
 
     leading_length = String.length(leading_punctuation)
-
     word_length = String.length(word) - leading_length - String.length(trailing_punctuation)
-
     pure_word = String.slice(word, leading_length, word_length)
 
     [ leading_punctuation, pure_word, trailing_punctuation]
