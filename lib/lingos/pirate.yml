@@ -2,6 +2,13 @@ gerund:
   ing: in'
   ings: in's
 words:
+  "i'm": i be
+  "isn't": be not
+  "it's": "'tis"
+  "that's": that be
+  "we're": "we's"
+  "you're": you be
+  "you've": ye
   address: port o' call
   admin: helm
   am: be
@@ -14,11 +21,11 @@ words:
   belief: creed
   between: betwixt
   big: vast
-  boy: lad
-  bring: bring
   boss: admiral
   bourbon: rum
   box: barrel
+  boy: lad
+  bring: bring
   business: company
   businesses: companies
   calling: "callin'"
@@ -50,18 +57,15 @@ words:
   hello: ahoy
   hey: ahoy
   hotel: inn
-  "i'm": i be
   internet: series o' tubes
   invalid: sunk
   is: be
   island: isle
-  "isn't": be not
-  "it's": "'tis"
   jail: brig
   kill: keelhaul
   king: king
-  leg: peg
   lady: lass
+  leg: peg
   logout: walk the plank
   male: pirate
   man: pirate
@@ -93,7 +97,6 @@ words:
   spouse: ball 'n' chain
   state: land
   supervisor: "Cap'n"
-  "that's": that be
   the: tha
   them: "'em"
   thing: thing
@@ -101,10 +104,9 @@ words:
   to: t'
   vodka: rum
   we: our jolly crew
-  "we're": "we's"
-  wine: grog
   whiskey: rum
   whisky: rum
+  wine: grog
   with: wit'
   woman: wench
   work: duty
@@ -112,6 +114,4 @@ words:
   yeah: aye
   yes: aye
   you: ye
-  "you're": you be
-  "you've": ye
   your: yer
