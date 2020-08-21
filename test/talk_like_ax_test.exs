@@ -24,7 +24,7 @@ defmodule TalkLikeAXTest do
   describe "#load_lingo/1" do
     test "loads default lingo, pirate" do
       {:ok, pirate_lingo} = TalkLikeAX.load_lingo()
-      assert Map.get(pirate_lingo, "admin") == "helm"
+      assert Map.get(pirate_lingo["words"], "admin") == "helm"
     end
 
     test "handles lingo that doesnt exist" do

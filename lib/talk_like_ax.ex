@@ -34,7 +34,7 @@ defmodule TalkLikeAX do
 
   def convert_word(lingo_map, word) do
     [leading_puncuation, pure_word, trailing_puncuation] = extract_punctuation(word)
-    new_word = Map.get(lingo_map, pure_word, pure_word)
+    new_word = Map.get(lingo_map["words"], pure_word, pure_word)
     leading_puncuation <> new_word <> trailing_puncuation
   end
 
