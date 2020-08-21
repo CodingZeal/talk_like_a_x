@@ -13,6 +13,11 @@ defmodule TalkLikeAXTest do
       assert TalkLikeAX.translate("hello friend, that's really nice hat you got there friend.") ==
                {:ok, "ahoy shipmate, that be verily nice hat ye got there shipmate."}
     end
+
+    test "does not downcase words when converting to lingo" do
+      assert TalkLikeAX.translate("Hello, how's it going over there at ZEAL?") ==
+               {:ok, "Ahoy, how's it goin' o'er there at ZEAL?"}
+    end
   end
 
   describe "#translate/2" do
@@ -28,7 +33,7 @@ defmodule TalkLikeAXTest do
     end
 
     test "handles lingo that doesnt exist" do
-      {status, message} = TalkLikeAX.load_lingo(:blahblah)
+      {status, _ } = TalkLikeAX.load_lingo(:blahblah)
       assert status == :error
     end
   end

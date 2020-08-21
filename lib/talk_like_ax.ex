@@ -26,7 +26,6 @@ defmodule TalkLikeAX do
 
   def convert_to_lingo(words, lingo_map) do
     words
-    |> String.downcase(:default)
     |> String.split(" ")
     |> Enum.map(fn word -> convert_word(lingo_map, word) end)
     |> Enum.join(" ")
@@ -34,11 +33,13 @@ defmodule TalkLikeAX do
 
   def convert_word(lingo_map, word) do
     [leading_puncuation, pure_word, trailing_puncuation] = extract_punctuation(word)
+
+    pure_word = String.downcase(pure_word, :default)
     new_word = Map.get(lingo_map["words"], pure_word, pure_word)
 
-    new_word = convert_gerund(lingo_map, new_word)
-
-    leading_puncuation <> new_word <> trailing_puncuation
+    convert_gerund(lingo_map, new_word)
+    |> restore_capitalization(word)
+    |> reconstruct_word(leading_puncuation, trailing_puncuation)
   end
 
   def convert_gerund(lingo_map, word) do
@@ -62,6 +63,21 @@ defmodule TalkLikeAX do
   def load_lingo(lingo \\ :pirate) do
     path = Path.join(File.cwd!(), "lib/lingos/#{lingo}.yml")
     YamlElixir.read_from_file(path)
+  end
+
+  defp reconstruct_word(word, leading_puncuation, trailing_puncuation) do
+    leading_puncuation <> word <> trailing_puncuation
+  end
+
+  defp restore_capitalization(new_word, word) do
+    cond do
+      word == String.upcase(word) ->
+        String.upcase(new_word)
+      word == String.capitalize(word) ->
+        String.capitalize(new_word)
+      true ->
+        new_word
+    end
   end
 
   defp replace_gerund(found_gerund, lingo_map, word) when is_bitstring(found_gerund) do
