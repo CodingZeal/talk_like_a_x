@@ -42,13 +42,9 @@ defmodule TalkLikeAX do
   end
 
   def convert_gerund(lingo_map, word) do
-    gerunds = Map.keys(lingo_map["gerund"])
-    if found_gerund = Enum.find(gerunds, fn g -> Regex.match?(~r/#{g}\Z/, word) end ) do
-      replacement_gerund = Map.get(lingo_map["gerund"], found_gerund)
-      Regex.replace ~r/#{found_gerund}\Z/, word, replacement_gerund
-    else
-      word
-    end
+    Map.keys(lingo_map["gerund"])
+    |> Enum.find(fn g -> Regex.match?(~r/#{g}\Z/, word) end)
+    |> replace_gerund(lingo_map, word)
   end
 
   @spec extract_punctuation(any) :: nil
@@ -67,4 +63,11 @@ defmodule TalkLikeAX do
     path = Path.join(File.cwd!(), "lib/lingos/#{lingo}.yml")
     YamlElixir.read_from_file(path)
   end
+
+  defp replace_gerund(found_gerund, lingo_map, word) when is_bitstring(found_gerund) do
+    replacement_gerund = Map.get(lingo_map["gerund"], found_gerund)
+    Regex.replace ~r/#{found_gerund}\Z/, word, replacement_gerund
+  end
+
+  defp replace_gerund(nil, _, word), do: word
 end
