@@ -32,7 +32,7 @@ defmodule TalkLikeAX do
   end
 
   def convert_word(lingo_map, word) do
-    [leading_puncuation, pure_word, trailing_puncuation] = extract_punctuation(word)
+    [leading_puncuation, pure_word, trailing_puncuation] = deconstruct_word(word)
 
     pure_word = String.downcase(pure_word, :default)
     new_word = Map.get(lingo_map["words"], pure_word, pure_word)
@@ -48,8 +48,8 @@ defmodule TalkLikeAX do
     |> replace_gerund(lingo_map, word)
   end
 
-  @spec extract_punctuation(any) :: nil
-  def extract_punctuation(word) do
+  @spec deconstruct_word(any) :: nil
+  def deconstruct_word(word) do
     [[ _, leading_punctuation ]] = Regex.scan @leading_punctuation_regex, word
     [[ _, trailing_punctuation ]] = Regex.scan @trailing_punctuation_regex, word
 

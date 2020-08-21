@@ -38,10 +38,10 @@ defmodule TalkLikeAXTest do
     end
   end
 
-  describe "#extract_punctuation/1" do
+  describe "#deconstruct_word/1" do
     test "return list containg leading punc, word, and trailing punc" do
-      assert TalkLikeAX.extract_punctuation(",this.out.") == [",", "this.out", "."]
-      assert TalkLikeAX.extract_punctuation(",,,,this.out......") == [",,,,", "this.out", "......"]
+      assert TalkLikeAX.deconstruct_word(",this.out.") == [",", "this.out", "."]
+      assert TalkLikeAX.deconstruct_word(",,,,this.out......") == [",,,,", "this.out", "......"]
     end
   end
 
