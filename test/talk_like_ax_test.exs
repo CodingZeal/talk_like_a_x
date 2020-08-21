@@ -40,7 +40,7 @@ defmodule TalkLikeAXTest do
     end
   end
 
-  describe "#convert_word" do
+  describe "#convert_word/2" do
     test "Converts the word 'friend' to 'shipmate'" do
       {:ok, pirate_lingo} = TalkLikeAX.load_lingo()
       assert TalkLikeAX.convert_word(pirate_lingo, "friend") == "shipmate"
@@ -49,6 +49,12 @@ defmodule TalkLikeAXTest do
     test "Converts the word with punctuation 'hello!' to 'ahoy!'" do
       {:ok, pirate_lingo} = TalkLikeAX.load_lingo()
       assert TalkLikeAX.convert_word(pirate_lingo, "hello!") == "ahoy!"
+    end
+
+    test "Converts gerand words to lingos style of word" do
+      {:ok, pirate_lingo} = TalkLikeAX.load_lingo()
+      assert TalkLikeAX.convert_word(pirate_lingo, "singing") == "singin'"
+      assert TalkLikeAX.convert_word(pirate_lingo, "smellings") == "smellin's"
     end
   end
 end

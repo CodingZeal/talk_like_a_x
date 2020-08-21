@@ -35,7 +35,20 @@ defmodule TalkLikeAX do
   def convert_word(lingo_map, word) do
     [leading_puncuation, pure_word, trailing_puncuation] = extract_punctuation(word)
     new_word = Map.get(lingo_map["words"], pure_word, pure_word)
+
+    new_word = convert_gerund(lingo_map, new_word)
+
     leading_puncuation <> new_word <> trailing_puncuation
+  end
+
+  def convert_gerund(lingo_map, word) do
+    gerunds = Map.keys(lingo_map["gerund"])
+    if found_gerund = Enum.find(gerunds, fn g -> Regex.match?(~r/#{g}\Z/, word) end ) do
+      replacement_gerund = Map.get(lingo_map["gerund"], found_gerund)
+      Regex.replace ~r/#{found_gerund}\Z/, word, replacement_gerund
+    else
+      word
+    end
   end
 
   @spec extract_punctuation(any) :: nil
