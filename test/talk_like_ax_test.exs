@@ -37,29 +37,4 @@ defmodule TalkLikeAXTest do
       assert status == :error
     end
   end
-
-  describe "#deconstruct_word/1" do
-    test "return list containg leading punc, word, and trailing punc" do
-      assert TalkLikeAX.deconstruct_word(",this.out.") == [",", "this.out", "."]
-      assert TalkLikeAX.deconstruct_word(",,,,this.out......") == [",,,,", "this.out", "......"]
-    end
-  end
-
-  describe "#convert_word/2" do
-    test "Converts the word 'friend' to 'shipmate'" do
-      {:ok, pirate_lingo} = TalkLikeAX.load_lingo()
-      assert TalkLikeAX.convert_word(pirate_lingo, "friend") == "shipmate"
-    end
-
-    test "Converts the word with punctuation 'hello!' to 'ahoy!'" do
-      {:ok, pirate_lingo} = TalkLikeAX.load_lingo()
-      assert TalkLikeAX.convert_word(pirate_lingo, "hello!") == "ahoy!"
-    end
-
-    test "Converts gerand words to lingos style of word" do
-      {:ok, pirate_lingo} = TalkLikeAX.load_lingo()
-      assert TalkLikeAX.convert_word(pirate_lingo, "singing") == "singin'"
-      assert TalkLikeAX.convert_word(pirate_lingo, "smellings") == "smellin's"
-    end
-  end
 end
