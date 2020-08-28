@@ -4,7 +4,7 @@ defmodule TalkLikeAX.Translator do
 
   def translate_to_lingo(words, lingo_map) do
     words
-    |> String.trim
+    |> String.trim()
     |> String.split(" ")
     |> Enum.map(fn word -> translate_word(lingo_map, word) end)
     |> Enum.join(" ")

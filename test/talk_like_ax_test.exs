@@ -25,16 +25,4 @@ defmodule TalkLikeAXTest do
       assert TalkLikeAX.translate("hello friend", :nothing_found) == {:error, :file_not_found}
     end
   end
-
-  describe "#load_lingo/1" do
-    test "loads default lingo, pirate" do
-      {:ok, pirate_lingo} = TalkLikeAX.load_lingo()
-      assert Map.get(pirate_lingo["words"], "admin") == "helm"
-    end
-
-    test "handles lingo that doesnt exist" do
-      {status, _ } = TalkLikeAX.load_lingo(:blahblah)
-      assert status == :error
-    end
-  end
 end

@@ -21,21 +21,24 @@ defmodule TalkLikeAXTest.Translator do
     end
 
     test "Converts sentence to lingo", context do
-      assert Translator. translate_to_lingo("Hello there friend I hope you well", context[:lingo]) == "Ahoy there shipmate I hope yee well"
-
+      assert Translator.translate_to_lingo("Hello there friend I hope you well", context[:lingo]) ==
+               "Ahoy there shipmate I hope yee well"
     end
 
     test "Converts sentence with punctuation marks properly", context do
-      assert Translator. translate_to_lingo("Hello, there friend I hope your day is good.", context[:lingo]) == "Ahoy, there shipmate I hope your sun up time is good."
+      assert Translator.translate_to_lingo(
+               "Hello, there friend I hope your day is good.",
+               context[:lingo]
+             ) == "Ahoy, there shipmate I hope your sun up time is good."
     end
 
     test "Converts sentence with leading and trailing whitespace properly", context do
-      assert Translator. translate_to_lingo(" Hello there ", context[:lingo]) == "Ahoy there"
+      assert Translator.translate_to_lingo(" Hello there ", context[:lingo]) == "Ahoy there"
     end
 
     test "Converts gerand words to lingos style of word", context do
-      assert Translator. translate_to_lingo("singing", context[:lingo]) == "singin'"
-      assert Translator. translate_to_lingo("smellings", context[:lingo]) == "smellin's"
+      assert Translator.translate_to_lingo("singing", context[:lingo]) == "singin'"
+      assert Translator.translate_to_lingo("smellings", context[:lingo]) == "smellin's"
     end
   end
 end
