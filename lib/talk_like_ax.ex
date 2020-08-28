@@ -48,16 +48,15 @@ defmodule TalkLikeAX do
     |> replace_gerund(lingo_map, word)
   end
 
-  @spec deconstruct_word(any) :: nil
   def deconstruct_word(word) do
-    [[ _, leading_punctuation ]] = Regex.scan @leading_punctuation_regex, word
-    [[ _, trailing_punctuation ]] = Regex.scan @trailing_punctuation_regex, word
+    [[_, leading_punctuation]] = Regex.scan(@leading_punctuation_regex, word)
+    [[_, trailing_punctuation]] = Regex.scan(@trailing_punctuation_regex, word)
 
     leading_length = String.length(leading_punctuation)
     word_length = String.length(word) - leading_length - String.length(trailing_punctuation)
     pure_word = String.slice(word, leading_length, word_length)
 
-    [ leading_punctuation, pure_word, trailing_punctuation]
+    [leading_punctuation, pure_word, trailing_punctuation]
   end
 
   def load_lingo(lingo \\ :pirate) do
@@ -73,8 +72,10 @@ defmodule TalkLikeAX do
     cond do
       word == String.upcase(word) ->
         String.upcase(new_word)
+
       word == String.capitalize(word) ->
         String.capitalize(new_word)
+
       true ->
         new_word
     end
@@ -82,7 +83,7 @@ defmodule TalkLikeAX do
 
   defp replace_gerund(found_gerund, lingo_map, word) when is_bitstring(found_gerund) do
     replacement_gerund = Map.get(lingo_map["gerund"], found_gerund)
-    Regex.replace ~r/#{found_gerund}\Z/, word, replacement_gerund
+    Regex.replace(~r/#{found_gerund}\Z/, word, replacement_gerund)
   end
 
   defp replace_gerund(nil, _, word), do: word
