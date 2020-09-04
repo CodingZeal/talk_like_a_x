@@ -1,5 +1,6 @@
 defmodule TalkLikeAX do
   alias TalkLikeAX.Translator
+  alias TalkLikeAX.LingoLoader
 
   @moduledoc """
   Documentation for `TalkLikeAX`.
@@ -17,14 +18,9 @@ defmodule TalkLikeAX do
 
   """
   def translate(words, lingo \\ :pirate) when is_bitstring(words) do
-    case load_lingo(lingo) do
+    case LingoLoader.load_lingo(lingo) do
       {:ok, lingo_map} -> {:ok, Translator.translate_to_lingo(words, lingo_map)}
       {:error, _} -> {:error, :file_not_found}
     end
-  end
-
-  def load_lingo(lingo \\ :pirate) do
-    path = Path.join(File.cwd!(), "lib/lingos/#{lingo}.yml")
-    YamlElixir.read_from_file(path)
   end
 end

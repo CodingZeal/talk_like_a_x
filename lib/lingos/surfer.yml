@@ -1,2 +1,4 @@
-address: port o' call
-admin: helm
+words:
+  hello: sup
+  hi: sup
+  bro: bruh

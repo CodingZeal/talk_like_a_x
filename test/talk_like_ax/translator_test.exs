@@ -17,11 +17,25 @@ defmodule TalkLikeAXTest.Translator do
         }
       }
 
-      {:ok, lingo: custom_lingo}
+      custom_without_gerund = %{
+        "words" => %{
+          "friend" => "shipmate",
+          "hello" => "ahoy",
+          "you" => "yee",
+          "day" => "sun up time"
+        }
+      }
+
+      {:ok, lingo: custom_lingo, lingo_without_gerund: custom_without_gerund}
     end
 
     test "Converts sentence to lingo", context do
       assert Translator.translate_to_lingo("Hello there friend I hope you well", context[:lingo]) ==
+               "Ahoy there shipmate I hope yee well"
+    end
+
+    test "Converts sentence to lingo without any gerunds", context do
+      assert Translator.translate_to_lingo("Hello there friend I hope you well", context[:lingo_without_gerund]) ==
                "Ahoy there shipmate I hope yee well"
     end
 

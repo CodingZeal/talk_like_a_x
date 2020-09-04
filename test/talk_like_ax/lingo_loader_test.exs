@@ -17,11 +17,19 @@ defmodule TalkLikeAXTest.LingoLoader do
 
   describe "#load_lingo_and_extend/2" do
     test "loads default lingo and extends it with passed map" do
-      {:ok, pirate_lingo} =
-        LingoLoader.load_lingo_and_extend(nil, %{"words" => %{"bloop" => "boop"}})
+      {:ok, default_lingo} =
+        LingoLoader.load_lingo_and_extend(%{"words" => %{"bloop" => "boop"}})
 
-      assert Map.get(pirate_lingo["words"], "bloop") == "boop"
-      assert Map.get(pirate_lingo["words"], "admin") == "helm"
+      assert Map.get(default_lingo["words"], "bloop") == "boop"
+      assert Map.get(default_lingo["words"], "admin") == "helm"
+    end
+
+    test "loads 'surfer' lingo and extends it with passed map" do
+      {:ok, surfer_lingo} =
+        LingoLoader.load_lingo_and_extend(:surfer, %{"words" => %{"cool" => "tubular"}})
+
+      assert Map.get(surfer_lingo["words"], "bro") == "bruh"
+      assert Map.get(surfer_lingo["words"], "cool") == "tubular"
     end
   end
 end

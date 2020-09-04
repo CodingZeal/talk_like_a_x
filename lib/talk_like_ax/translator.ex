@@ -22,9 +22,13 @@ defmodule TalkLikeAX.Translator do
   end
 
   defp translate_gerund(lingo_map, word) do
-    Map.keys(lingo_map["gerund"])
-    |> Enum.find(fn g -> Regex.match?(~r/#{g}\Z/, word) end)
-    |> replace_gerund(lingo_map, word)
+    case Map.has_key?(lingo_map, "gerund") do
+      true ->
+        Map.keys(lingo_map["gerund"])
+        |> Enum.find(fn g -> Regex.match?(~r/#{g}\Z/, word) end)
+        |> replace_gerund(lingo_map, word)
+      _ -> word
+    end
   end
 
   defp deconstruct_word(word) do
