@@ -11,10 +11,10 @@ defmodule TalkLikeAX.Translator do
   end
 
   defp translate_word(lingo_map, word) do
-    [leading_puncuation, pure_word, trailing_puncuation] = deconstruct_word(word)
+    {leading_puncuation, original_word, trailing_puncuation} = extract_word(word)
 
-    pure_word = String.downcase(pure_word, :default)
-    new_word = Map.get(lingo_map["words"], pure_word, pure_word)
+    original_word = String.downcase(original_word, :default)
+    new_word = Map.get(lingo_map["words"], original_word, original_word)
 
     translate_gerund(lingo_map, new_word)
     |> restore_capitalization(word)
@@ -31,29 +31,29 @@ defmodule TalkLikeAX.Translator do
     end
   end
 
-  defp deconstruct_word(word) do
+  defp extract_word(word) do
     [[_, leading_punctuation]] = Regex.scan(@leading_punctuation_regex, word)
     [[_, trailing_punctuation]] = Regex.scan(@trailing_punctuation_regex, word)
 
     leading_length = String.length(leading_punctuation)
     word_length = String.length(word) - leading_length - String.length(trailing_punctuation)
-    pure_word = String.slice(word, leading_length, word_length)
+    original_word = String.slice(word, leading_length, word_length)
 
-    [leading_punctuation, pure_word, trailing_punctuation]
+    {leading_punctuation, original_word, trailing_punctuation}
   end
 
   defp reconstruct_word(word, leading_puncuation, trailing_puncuation) do
     leading_puncuation <> word <> trailing_puncuation
   end
 
-  defp restore_capitalization(new_word, word) do
+  defp restore_capitalization(new_word, original_word) do
     cond do
-      word == String.upcase(word) ->
+      original_word == String.upcase(original_word) ->
         String.upcase(new_word)
 
-      word == String.capitalize(word) ->
-        String.capitalize(new_word)
-
+      original_word == String.capitalize(original_word) ->
+        [first_letter | other_stuff] = String.graphemes(new_word)
+        List.to_string([String.upcase(first_letter), other_stuff])
       true ->
         new_word
     end
