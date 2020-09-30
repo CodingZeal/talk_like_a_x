@@ -19,3 +19,9 @@ Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_do
 and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
 be found at [https://hexdocs.pm/talk_like_a_x](https://hexdocs.pm/talk_like_a_x).
 
+## Running Linting
+
+Run credo for refactoring and syntax issues
+```
+mix credo
+```
