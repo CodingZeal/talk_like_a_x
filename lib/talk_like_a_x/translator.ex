@@ -1,4 +1,6 @@
 defmodule TalkLikeAX.Translator do
+  @moduledoc false
+
   @leading_punctuation_regex ~r/\A([^a-zA-Z]*)/
   @trailing_punctuation_regex ~r/[a-zA-Z]+([^a-zA-Z]*)\Z/
 

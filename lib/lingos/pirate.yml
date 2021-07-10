@@ -11,6 +11,7 @@ words:
   "you've": ye
   address: port o' call
   admin: helm
+  afraid: afeared
   am: be
   an: a
   and: "n'"
@@ -31,6 +32,7 @@ words:
   calling: "callin'"
   canada: "Great North"
   cash: doubloons
+  captain: "cap'n"
   cheat: hornswaggle
   comments: yer words
   country: land
@@ -46,13 +48,16 @@ words:
   fee: debt
   female: wench
   for: fer
-  friend: shipmate
+  food: grub
+  friend: matey
+  friends: "me hearties"
   gin: rum
   girl: lass
   girls: lassies
   go: sail
   good: jolly good
   group: maties
+  halt: heave
   hand: hook
   hello: ahoy
   hey: ahoy
@@ -69,6 +74,7 @@ words:
   logout: walk the plank
   male: pirate
   man: pirate
+  map: chart
   manager: admiral
   money: doubloons
   month: moon
@@ -87,8 +93,11 @@ words:
   relatives: kin
   religion: creed
   ring: ring
+  rob: pillage
+  robbery: piracy
   role: job
   say: cry
+  sailor: "jack tar"
   seconds: ticks o' tha clock
   shipping: cargo
   small: puny
@@ -96,7 +105,11 @@ words:
   sorry: yarr
   spouse: ball 'n' chain
   state: land
+  steal: plunder
+  stranded: marooned
   supervisor: "Cap'n"
+  sword: cutlass
+  telescope: spyglass
   the: tha
   them: "'em"
   thing: thing
@@ -106,10 +119,12 @@ words:
   we: our jolly crew
   whiskey: rum
   whisky: rum
+  whip: flog
   wine: grog
   with: wit'
   woman: wench
   work: duty
+  wow: blimey
   yah: aye
   yeah: aye
   yes: aye

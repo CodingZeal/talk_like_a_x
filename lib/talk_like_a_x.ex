@@ -17,7 +17,7 @@ defmodule TalkLikeAX do
   ## Examples
 
       iex> TalkLikeAX.translate("hello friend")
-      { :ok, "ahoy shipmate" }
+      { :ok, "ahoy matey" }
   """
   def translate(words) when is_bitstring(words), do: translate(words, :pirate)
 
@@ -32,7 +32,11 @@ defmodule TalkLikeAX do
   ## Examples
 
       iex> TalkLikeAX.translate("hello friend", :pirate)
-      { :ok, "ahoy shipmate" }
+      { :ok, "ahoy matey" }
+
+
+      iex> TalkLikeAX.translate("Hello friend, doctorargus", :doesnt_exist)
+      { :error, :file_not_found }
   """
   def translate(words, lingo \\ :pirate) when is_bitstring(words) do
     case LingoLoader.load_lingo(lingo) do
@@ -52,8 +56,8 @@ defmodule TalkLikeAX do
 
   ## Examples
 
-      iex> TalkLikeAX.translate("Hello friend, doctorargus", :pirate, %{ "words" => %{ "doctorargus" => "DocArrrrgus" } })
-      { :ok, "Ahoy shipmate, DocArrrrgus" }
+      iex> TalkLikeAX.translate("Hello friend, doctorargus", :pirate, %{ "words" => %{ "doctorargus" => "Doc Arrrrgus" } })
+      { :ok, "Ahoy matey, Doc Arrrrgus" }
   """
   def translate(words, lingo, extended_lingo) when is_map(extended_lingo) do
     case LingoLoader.load_lingo_and_extend(lingo, extended_lingo) do
