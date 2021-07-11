@@ -10,7 +10,7 @@ by adding `talk_like_a_x` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:talk_like_a_x, "~> 0.1.0"}
+    {:talk_like_a_x, "~> 0.0.2"}
   ]
 end
 ```
