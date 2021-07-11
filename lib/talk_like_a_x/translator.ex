@@ -12,6 +12,8 @@ defmodule TalkLikeAX.Translator do
     |> Enum.join(" ")
   end
 
+  defp translate_word(_lingo_map, ""), do: ""
+
   defp translate_word(lingo_map, word) do
     {leading_puncuation, original_word, trailing_puncuation} = extract_word(word)
 
