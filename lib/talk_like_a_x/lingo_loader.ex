@@ -2,7 +2,7 @@ defmodule TalkLikeAX.LingoLoader do
   @moduledoc false
 
   def load_lingo(lingo \\ :pirate) do
-    path = Path.join([__DIR__, "..", "lingos", "#{lingo}.yml"])
+    path = Path.expand("lingos/#{lingo}.yml", "lib") |> Path.absname
     YamlElixir.read_from_file(path)
   end
 
