@@ -2,8 +2,11 @@ defmodule TalkLikeAX.LingoLoader do
   @moduledoc false
 
   def load_lingo(lingo \\ :pirate) do
-    path = Path.join([__DIR__, "lingos", "#{lingo}.yml"])
-    YamlElixir.read_from_file(path)
+    case lingo do
+      :pirate -> {:ok, TalkLikeAX.Lingos.Pirate.map() }
+      :surfer -> {:ok, TalkLikeAX.Lingos.Surfer.map() }
+      _ -> {:error, :lingo_doesnt_exist}
+    end
   end
 
   def load_lingo_and_extend(extended_lingo) when is_map(extended_lingo) do

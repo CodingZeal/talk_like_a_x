@@ -39,12 +39,12 @@ defmodule TalkLikeAX do
 
 
       iex> TalkLikeAX.translate("Hello friend, doctorargus", :doesnt_exist)
-      { :error, :file_not_found }
+      { :error, :lingo_doesnt_exist }
   """
   def translate(words, lingo \\ :pirate) when is_bitstring(words) do
     case LingoLoader.load_lingo(lingo) do
       {:ok, lingo_map} -> {:ok, Translator.translate_to_lingo(words, lingo_map)}
-      {:error, _} -> {:error, :file_not_found}
+      {:error, msg} -> {:error, msg}
     end
   end
 
