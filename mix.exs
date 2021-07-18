@@ -4,7 +4,7 @@ defmodule TalkLikeAX.MixProject do
   def project do
     [
       app: :talk_like_a_x,
-      version: "0.0.6",
+      version: "0.0.7",
       elixir: "~> 1.10",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
@@ -26,7 +26,6 @@ defmodule TalkLikeAX.MixProject do
   defp deps do
     [
       {:ex_doc, ">= 0.0.0", only: :dev, runtime: false},
-      {:yaml_elixir, "~> 2.5"},
       {:credo, "~> 1.4", only: [:dev, :test], runtime: false},
       {:mix_test_watch, "~> 1.0", only: :dev, runtime: false},
       {:deep_merge, "~> 1.0"}
