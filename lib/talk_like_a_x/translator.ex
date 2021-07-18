@@ -1,8 +1,8 @@
 defmodule TalkLikeAX.Translator do
   @moduledoc false
 
-  @leading_punctuation_regex ~r/\A([^a-zA-Z]*)/
-  @trailing_punctuation_regex ~r/[a-zA-Z]+([^a-zA-Z]*)\Z/
+  @leading_punctuation_regex ~r/\A([^a-zA-Z0-9]*)/
+  @trailing_punctuation_regex ~r/[a-zA-Z0-9]+([^a-zA-Z0-9]*)\Z/
 
   def translate_to_lingo(words, lingo_map) do
     words

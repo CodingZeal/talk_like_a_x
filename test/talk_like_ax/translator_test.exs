@@ -34,6 +34,11 @@ defmodule TalkLikeAXTest.Translator do
                "Ahoy there shipmate I hope yee well"
     end
 
+    test "Handles sentences containing just numbers", context do
+      assert Translator.translate_to_lingo("222,000", context[:lingo]) ==
+               "222,000"
+    end
+
     test "Converts sentence to lingo without any gerunds", context do
       assert Translator.translate_to_lingo("Hello there friend I hope you well", context[:lingo_without_gerund]) ==
                "Ahoy there shipmate I hope yee well"
