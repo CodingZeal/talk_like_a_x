@@ -59,5 +59,10 @@ defmodule TalkLikeAXTest.Translator do
       assert Translator.translate_to_lingo("singing", context[:lingo]) == "singin'"
       assert Translator.translate_to_lingo("smellings", context[:lingo]) == "smellin's"
     end
+
+    test "can handle non-word characters characters", context do
+      assert Translator.translate_to_lingo("***", context[:lingo]) == "***"
+      assert Translator.translate_to_lingo("***&&$$", context[:lingo]) == "***&&$$"
+    end
   end
 end

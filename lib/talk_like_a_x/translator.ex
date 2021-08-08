@@ -37,13 +37,21 @@ defmodule TalkLikeAX.Translator do
 
   defp extract_word(word) do
     [[_, leading_punctuation]] = Regex.scan(@leading_punctuation_regex, word)
-    [[_, trailing_punctuation]] = Regex.scan(@trailing_punctuation_regex, word)
+    trailing_punctuation = extract_trailing_punctuation(word)
 
     leading_length = String.length(leading_punctuation)
     word_length = String.length(word) - leading_length - String.length(trailing_punctuation)
     original_word = String.slice(word, leading_length, word_length)
 
     {leading_punctuation, original_word, trailing_punctuation}
+  end
+
+  defp extract_trailing_punctuation(word) do
+    trailing_match = Regex.scan(@trailing_punctuation_regex, word)
+    case List.first(trailing_match) do
+      nil -> ""
+      [_, matching_punctuation] -> matching_punctuation
+    end
   end
 
   defp reconstruct_word(word, leading_puncuation, trailing_puncuation) do
